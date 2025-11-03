@@ -26,7 +26,7 @@ Este modelo cae en la categoría de dinámico no equilibrio térmico (NTEM). La 
 
 Recientemente, Al Ghafri et al [3] desarrollaron e implementaron un modelo en el paquete BoilFAST, que presenta un modelo termodinámico no equilibrio con vapor sobrecalentado (SHV). Este modelo estima auto-presurización y boil off de LH2 en distintas geometrías de tanque, incluidos horizontales con cabezales. 
 El modelo también opera en condiciones no isobáricas, sin equilibrio térmico y modela dos nodos correspondientes a la fase líquida y vapor. 
-La validación del modelo fue realizada frente a datos experimentales de un estanque horizontal de 125m3 del Jennedy Space Centre. Los resultados muestran que el modelo se ajusta bien a los datos. El modelo confirma que la conducción es la que domina la transferencia de calor por sobre la convección en estanques grandes.
+La validación del modelo fue realizada frente a datos experimentales de un estanque horizontal de 125m3 del Jennedy Space Centre. El modelo confirma que la conducción es la que domina la transferencia de calor por sobre la convección en estanques grandes.
 
 ---
 
@@ -34,34 +34,21 @@ La validación del modelo fue realizada frente a datos experimentales de un esta
 
 El modelo implementado corresponde a una adaptación del enfoque no en equilibrio de **Huerta & Vesovic (2019)** para estanques horizontales, bajo las siguientes hipótesis:
 
-- Presión constante (*isobárico*).
+- No isobárico
 - Evaporación de un líquido puro (LH₂, LNG, LN₂, etc.).
 - Transferencia de calor por conducción y advección en el vapor.
 - Interfaz líquido-vapor plana y lisa.
 - Tanque aislado con ingreso de calor por paredes laterales.
 
-Las ecuaciones principales son:
-
-1. **Balance de masa total:**
-   \[
-   \dot{B}_L = -\frac{d(\rho_L V_L)}{dt}
-   \]
-2. **Balance de energía líquido:**
-   \[
-   \dot{Q}_L + \dot{Q}_{slab} + \dot{Q}_{VL} - \dot{B}_L h_V(T_L) = \frac{d(\rho_L V_L h_L(T_L))}{dt}
-   \]
-3. **Ecuación de conducción-advección en el vapor:**
-   \[
-   \frac{\partial T_V}{\partial t} = \alpha \frac{\partial^2 T_V}{\partial z^2} - v_z \frac{\partial T_V}{\partial z} + \frac{\alpha}{k_V} \dot{S}_{wall}
-   \]
-
-El sistema completo se resuelve como un conjunto de **Ecuaciones Diferenciales Algebraicas (DAE)** acopladas, integradas mediante **método de líneas** y esquema implícito (*ode15i* en MATLAB o *solve_ivp* en Python*).
+En base al modelo para estanques verticales, se hizo una adaptación de las ecuaciones modificando la geometría para el caso horizontal. El modelo explicado se encuentra en el Jupyter Notebook "Modelo.ipynb"
 
 ---
 
 ## 🧱 Estanque a modelar
 
 El estanque corresponde a un **cilindro horizontal** con tapas planas, típicamente utilizado para transporte terrestre o almacenamiento de GNL/LH₂ en plantas piloto.  
+El código permite evaluar estanques con distintas dimensiones. En el Jupyter Notebook llamado "Modelado estanque 50m3", se encuentra la simulación de un estanque con dimensiones similares a las del estanque de Air Liquide "Hopu SR-57 LH2".
+
 Los parámetros geométricos principales son:
 
 | Parámetro | Símbolo | Valor típico | Unidad |
@@ -79,15 +66,4 @@ El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujo
 
 ## 📂 Estructura del repositorio
 
-├── README.md # Descripción general del proyecto
-├── /src # Código fuente del modelo
-│ ├── tank.py # Clase principal Tank: balance de masa, energía y geometría
-│ ├── geometry.py # Cálculo de áreas y volúmenes diferenciales (horizontal)
-│ ├── cryogen.py # Propiedades termofísicas del fluido (CoolProp)
-│ ├── plots.py # Funciones de visualización de resultados
-│ └── utils.py # Funciones auxiliares (integración, interpolación, etc.)
-├── /data # Archivos de entrada y resultados experimentales
-│ ├── experiments/ # Datos de validación (BOG, perfiles T, etc.)
-│ └── inputs/ # Configuraciones geométricas y de simulación
-├── /results # Salidas de simulación (gráficos, CSV, etc.)
-└── main.ipynb # Notebook principal de simulación y análisis
+
