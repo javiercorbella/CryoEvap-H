@@ -4,7 +4,7 @@
 
 
 
-## 📘 Contexto del problema y relevancia para Chile
+## Contexto del problema y relevancia para Chile
 
 El almacenamiento criogénico es una tecnología clave para la transición energética, particularmente en la distribución de **hidrógeno líquido (LH₂)** y **gas natural licuado (GNL)**. En Chile, el interés por estas tecnologías está creciendo debido al desarrollo de la **industria del hidrógeno verde**, los proyectos portuarios asociados y las aplicaciones de **movilidad y respaldo energético** en zonas aisladas.
 
@@ -12,7 +12,7 @@ El modelamiento térmico y de evaporación (BOG, *Boil-Off Gas*) de estanques cr
 
 ---
 
-## 🔬 Estado del arte
+## Estado del arte
 
 Numerosos modelos se han desarrollado para predecir el comportamiento termodinámico de líquidos criogénicos dentro de estanques aislados. A continuación, se muestran ejemplos de investigaciones en las cuales se proponen y validan modelos de estanques cilíndricos horizontales, relevantes para el desarrollo del proyecto individual. 
 Kalikatzarakis et. al. [1] desarrollaron un modelo dinámico de tanque criogénico horizontal utilizado para almacenas GNL en buques propulsados por gas natural licuado. 
@@ -30,7 +30,7 @@ La validación del modelo fue realizada frente a datos experimentales de un esta
 
 ---
 
-## 🧮 Modelo implementado
+## Modelo implementado
 
 El modelo implementado corresponde a una adaptación del enfoque no en equilibrio de **Huerta & Vesovic (2019)** para estanques horizontales, bajo las siguientes hipótesis:
 
@@ -44,7 +44,7 @@ En base al modelo para estanques verticales, se hizo una adaptación de las ecua
 
 ---
 
-## 🧱 Estanque a modelar
+## Estanque a modelar
 
 El estanque corresponde a un **cilindro horizontal** con tapas planas, típicamente utilizado para transporte terrestre o almacenamiento de GNL/LH₂ en plantas piloto.  
 El código permite evaluar estanques con distintas dimensiones. En el Jupyter Notebook llamado "Modelado estanque 50m3", se encuentra la simulación de un estanque con dimensiones similares a las del estanque de Air Liquide "Hopu SR-57 LH2".
@@ -58,12 +58,11 @@ Los parámetros geométricos principales son:
 | Volumen total | \( V_t \) | ≈ 50 | m³ |
 | Nivel de llenado inicial | \( LF \) | 0.3–0.9 | - |
 | Espesor de pared | \( e \) | 0.02 | m |
-| Conductividad térmica del aislante | \( k_{ins} \) | 0.03 | W/m·K |
 
 El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujos de calor en función del tiempo y del nivel de llenado.
 
 ---
 
-## 📂 Estructura del repositorio
+## Estructura del repositorio
 
 
