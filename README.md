@@ -34,7 +34,7 @@ La validación del modelo fue realizada frente a datos experimentales de un esta
 
 El modelo implementado corresponde a una adaptación del enfoque no en equilibrio de **Huerta & Vesovic (2019)** para estanques horizontales, bajo las siguientes hipótesis:
 
-- No isobárico
+- Isobárico
 - Evaporación de un líquido puro (LH₂, LNG, LN₂, etc.).
 - Transferencia de calor por conducción y advección en el vapor.
 - Interfaz líquido-vapor plana y lisa.
