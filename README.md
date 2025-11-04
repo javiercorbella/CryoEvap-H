@@ -65,4 +65,12 @@ El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujo
 
 ## Estructura del repositorio
 
+## Referencias
+
+1.  Kalikatzarakis, M., et al., Model based analysis of the boil-off gas management and control for LNG fuelled vessels. Energy, 2022. 251: p. 123872.
+2.	Appel, K., Numerical Modeling of Liquid Hydrogen Storage Tanks for the Reduction of Boil-Off Losses, J. Leachman, K. Matveev, and S. Banerjee, Editors. 2024, Washington State University.
+3.	Wan, C., et al., Experimental study on self-pressurization and active pressure management in a horizontal liquid hydrogen tank. International Journal of Hydrogen Energy, 2025. 152: p. 149399.
+4.	Lee, D.-H., et al., Practical Prediction of the Boil-Off Rate of Independent-Type Storage Tanks. Journal of Marine Science and Engineering, 2021. 9: p. 36.
+
+
 
