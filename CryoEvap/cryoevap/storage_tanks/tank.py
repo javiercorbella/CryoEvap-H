@@ -178,7 +178,7 @@ class Tank:
         elif self.Geo_l == 'horizontal':
             self.z   = self._z_L()
             radius   = np.sqrt(self.d_i*self.z - self.z**2)
-            self.A_T = self.L * 2*radius + np.pi* radius**2  # [m^2] cross section area
+            self.A_T = self.L * 2*radius  # [m^2] cross section area
 
         # Computes total heat ingress to the liquid
         Q_L_tot = self.Q_L_in + self.Q_b + self.Q_VL(self.cryogen.T_V) + self.Q_wi
@@ -220,7 +220,7 @@ class Tank:
         elif self.Geo_v == "horizontal":
             h_grid = self.z_grid*(L_dry)+self.z
             radius   = np.sqrt(self.d_i*h_grid - h_grid**2)
-            weight = self.L * 2*radius + np.pi* radius**2  # [m^2] cross section area
+            weight = self.L * 2*radius  # [m^2] cross section area
             self.cryogen.Tv_avg = simpson(T*weight, self.z_grid)/simpson(weight,self.z_grid)
 
             
@@ -282,17 +282,18 @@ class Tank:
             
             r = np.sqrt(abs((z)*2*self.l/2 - (z)**2))
             dr_dz = (self.d_i/2 - z)/np.sqrt(abs(2*(z)*self.d_i/2 - (z)**2))
-            
+
             #Update dT
             dT[1:-1] = alpha*d2T_dz2 - v_z*dT_dz + 2*dr_dz*alpha*dT_dz/r + S_wall
         
 
         elif self.Geo_v == "horizontal":
-            z = self.z_grid[1:-1]*L_dry + self.z
-            V_V = self.V * (1-self.LF)  
+            z = self.z_grid[1:-1]*L_dry + self.z  
             dA_dz = -(4*np.sqrt(self.l*z-z**2)+ self.l*self.L/(np.sqrt(self.l*z-z**2))) # variación del área al aumentar la altura
             dV_dz = -2*self.L*np.sqrt(self.l*z-z**2)
             S_wall = self.U_V * (self.T_air - T[1:-1]) * (1-self.eta_w) * (dA_dz/dV_dz) #A_V/V_V
+            v_z = self.v_z * (np.sqrt(np.maximum(self.d_i * self.z - self.z**2, 0.0)) /np.sqrt(np.maximum(self.d_i * z  - z**2, 1e-7))) #REVISAR ECUACION CON PROFESOR
+            
 
             # Update dT
             dT[1:-1] = alpha*d2T_dz2 - (v_z-v_int) * dT_dz + (alpha/self.cryogen.k_V_avg) * S_wall # REVISAR ECUACIÓN
@@ -510,7 +511,7 @@ class Tank:
             elif self.Geo_v == "horizontal":
                 h_grid  = self.z_grid*(self.l-l_L[i])+l_L[i]
                 radius  = np.sqrt(self.d_i*h_grid - h_grid**2)
-                weight  = self.L * 2*radius + np.pi* radius**2  # [m^2] cross section area
+                weight  = self.L * 2*radius  # [m^2] cross section area
             else:
                 weight = None
 
@@ -539,7 +540,7 @@ class Tank:
                 Tv_avg.append(simpson(T_v*weight, self.z_grid)/simpson(weight,self.z_grid))
                 zed = self.z_grid*(self.d_i-l_L[i]) + l_L[i]
                 self.z = l_L[i]
-                vz = self.v_z*(l_L[i]/zed)*(2*self.d_i/2 - l_L[i])/(2*self.d_i/2 - zed)
+                vz = self.v_z*(l_L[i]/zed)*(2*self.d_i/2 - l_L[i])/(2*self.d_i/2 - zed) #PReguntar a profesor por esto
                 for j, val in np.ndenumerate(zed):
                     if val>self.d_i*0.95:
                         vz[j[0]] = vz[j[0]-1]
@@ -565,7 +566,7 @@ class Tank:
         elif self.Geo_l=='horizontal': 
             # radius   = np.sqrt(self.d_i*self.z - self.z**2)
             # self.A_T = self.L * 2*radius + np.pi* radius**2
-            self.data["A_T"] = self.L * 2 * np.sqrt(self.d_i*l_L - l_L**2) + np.pi * (np.sqrt(self.d_i*l_L - l_L**2))**2
+            self.data["A_T"] = self.L * 2 * np.sqrt(self.d_i*l_L - l_L**2)
 
         self.data['vz']        = np.array(vz_list)
         self.data['V_L']       = self.sol.y[0]
@@ -593,8 +594,8 @@ class Tank:
             Q_V = self.U_V*((np.pi*self.d_o**2)/2 + ((self.d_i/2 - l_L)*np.pi*self.d_o))*(self.T_air - self.data['Tv_avg'])
         
         elif self.Geo_v == "horizontal" and self.Geo_l == "horizontal":
-            A_total = np.pi * self.d_o * self.L + 4 * np.pi * (self.d_o/2)**2
-            A_wet   = self.d_o * self.L * np.acos((self.d_o/2 - l_L) / (self.d_o/2)) + np.pi*self.d_o*(l_L + (self.d_o - self.d_i)/2)           
+            A_total = np.pi * self.d_o * self.L + 2 * np.pi * (self.d_o/2)**2
+            A_wet   = self.d_o * self.L * np.acos((self.d_o/2 - l_L) / (self.d_o/2)) + np.pi*self.d_o*(l_L + (self.d_o - self.d_i)/2)       # Revisar    
            
             Q_L = self.U_L * (self.T_air - self.cryogen.T_sat)  * A_wet
             Q_V = self.U_V * (self.T_air - self.data['Tv_avg']) * (A_total - A_wet)
