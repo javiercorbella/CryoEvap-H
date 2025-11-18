@@ -67,9 +67,13 @@ El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujo
 A continuación, se explican los archivos más relevantes para la correcta utilización del modelo.
 
 CryoEvap/Modelo/horzontal_tank_model.ipynb : Jupyter Notebook que muestra la explicación de cada una de las ecuaciones implementadas en el modelo.
+
 Cryoevap/cryoevap/storage_tanks/tank.py : implementa el modelo matemático, utilizando el método de líneas para resolver las ODE. 
+
 Cryoevap/cryoevap/storage_tanks/plots.py : Archivo que define funciones para graficar variables relevantes del modelo. 
+
 Cryoevap/notebooks/LH2_AirLiquide_tank.ipynb : Jupyter Notebook que muestra la simulación de un estanque de 56 m3, con las propiedades mencionadas más arriba.
+
 
 
 ## Referencias
