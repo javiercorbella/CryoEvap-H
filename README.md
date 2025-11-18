@@ -82,7 +82,9 @@ Cryoevap/cryoevap/storage_tanks/tank.py : implementa el modelo matemático, util
 
 Cryoevap/cryoevap/storage_tanks/plots.py : Archivo que define funciones para graficar variables relevantes del modelo. 
 
-Cryoevap/notebooks/LH2_AirLiquide_tank.ipynb : Jupyter Notebook que muestra la simulación de un estanque de 56 m3, con las propiedades mencionadas más arriba.
+Cryoevap/notebooks/LH2_AirLiquide_tank_LF_0.8.ipynb : Jupyter Notebook que muestra la simulación de un estanque de 56 m3, en base a un nivel de llenado de 80% del volumen total en líquido
+
+Cryoevap/notebooks/LH2_AirLiquide_tank_LF_0.2.ipynb : Jupyter Notebook que muestra la simulación de un estanque de 56 m3, en base a un nivel de llenado de 20% del volumen total en líquido
 
 
 
@@ -93,5 +95,13 @@ Cryoevap/notebooks/LH2_AirLiquide_tank.ipynb : Jupyter Notebook que muestra la s
 3.	Wan, C., et al., Experimental study on self-pressurization and active pressure management in a horizontal liquid hydrogen tank. International Journal of Hydrogen Energy, 2025. 152: p. 149399.
 4.	Lee, D.-H., et al., Practical Prediction of the Boil-Off Rate of Independent-Type Storage Tanks. Journal of Marine Science and Engineering, 2021. 9: p. 36.
 
+
+## Créditos
+
+Este trabajo fue desarrollado en conjunto con los siguientes autores, quienes formaron parte del proceso de modelación e implementación del código:
+
+Ignacio Tapia
+Felipe Huerta
+Javier Corbella
 
 
