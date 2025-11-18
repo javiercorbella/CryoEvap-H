@@ -64,7 +64,36 @@ El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujo
 ---
 
 ## Estructura del repositorio
-
+CryoEvap-H/
+│
+├── CryoEvap/ 
+│   ├── __init__.py
+│   ├── CryoEvap.py
+│   ├── Cryogen.py
+│   ├── Tank.py
+│   ├── horizontaltank.py
+│   └── plots.py
+│
+├── Notebooks/
+│   ├── Modelo.ipynb
+│   └── Modelado_estanque_50m3.ipynb
+│
+├── utils/
+│   ├── data_loader.py
+│   ├── geometry_tools.py
+│   └── interpolation.py
+│
+├── Data/
+│   ├── propiedades_lh2.csv
+│   ├── propiedades_lng.csv
+│   └── ejemplos_dimensiones.xlsx
+│
+├── docs/
+│   ├── figuras/
+│   └── ecuaciones_referencia.pdf
+│
+├── LICENSE
+└── README.md
 ## Referencias
 
 1.  Kalikatzarakis, M., et al., Model based analysis of the boil-off gas management and control for LNG fuelled vessels. Energy, 2022. 251: p. 123872.
