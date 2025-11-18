@@ -63,37 +63,15 @@ El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujo
 
 ---
 
-## Estructura del repositorio
-CryoEvap-H/
-│
-├── CryoEvap/ 
-│   ├── __init__.py
-│   ├── CryoEvap.py
-│   ├── Cryogen.py
-│   ├── Tank.py
-│   ├── horizontaltank.py
-│   └── plots.py
-│
-├── Notebooks/
-│   ├── Modelo.ipynb
-│   └── Modelado_estanque_50m3.ipynb
-│
-├── utils/
-│   ├── data_loader.py
-│   ├── geometry_tools.py
-│   └── interpolation.py
-│
-├── Data/
-│   ├── propiedades_lh2.csv
-│   ├── propiedades_lng.csv
-│   └── ejemplos_dimensiones.xlsx
-│
-├── docs/
-│   ├── figuras/
-│   └── ecuaciones_referencia.pdf
-│
-├── LICENSE
-└── README.md
+## Archivos relevantes 
+A continuación, se explican los archivos más relevantes para la correcta utilización del modelo.
+
+CryoEvap/Modelo/horzontal_tank_model.ipynb : Jupyter Notebook que muestra la explicación de cada una de las ecuaciones implementadas en el modelo.
+Cryoevap/cryoevap/storage_tanks/tank.py : implementa el modelo matemático, utilizando el método de líneas para resolver las ODE. 
+Cryoevap/cryoevap/storage_tanks/plots.py : Archivo que define funciones para graficar variables relevantes del modelo. 
+Cryoevap/notebooks/LH2_AirLiquide_tank.ipynb : Jupyter Notebook que muestra la simulación de un estanque de 56 m3, con las propiedades mencionadas más arriba.
+
+
 ## Referencias
 
 1.  Kalikatzarakis, M., et al., Model based analysis of the boil-off gas management and control for LNG fuelled vessels. Energy, 2022. 251: p. 123872.
