@@ -51,14 +51,15 @@ El código permite evaluar estanques con distintas dimensiones. En el Jupyter No
 
 Los parámetros geométricos principales son:
 
-| Parámetro | Símbolo | Valor típico | Unidad |
-|------------|----------|--------------|--------|
-| Diámetro interno | \( D_i \) | 2.5 | m |
-| Largo | \( L \) | 10 | m |
-| Volumen total | \( V_t \) | ≈ 50 | m³ |
-| Nivel de llenado inicial | \( LF \) | 0.3–0.9 | - |
-| Espesor de pared | \( e \) | 0.02 | m |
+| Parámetro | Valor típico | Unidad |
+|------------|--------------|--------|
+| Diámetro interno | 2.5 | m |
+| Largo | 10 | m |
+| Volumen total | 56 | m³ |
+| Nivel de llenado inicial | 0.8 | - |
+| Coeficientes globales de transf. de calor | 0.0045 | W/m2 K |
 
+Nota: Los coeficientes de transferencia de calor fueron calculados en base a obtener un BOR de 1%, valor estimado por bibliografía. 
 El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujos de calor en función del tiempo y del nivel de llenado.
 
 ---
