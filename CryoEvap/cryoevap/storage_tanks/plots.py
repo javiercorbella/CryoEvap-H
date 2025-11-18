@@ -284,3 +284,75 @@ def plot_vz(tank):
 
     # Show the plot
     # plt.show()
+
+
+# Plots advective velocity profiles considering horizontal geometry
+
+def plot_vz_h(tank): 
+    import numpy as np
+    from scipy.optimize import root_scalar
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import FormatStrFormatter
+
+    # Number of profiles
+    n_plots = int(tank.sol.t[-1] / tank.plot_interval)
+    plot_step = int(tank.plot_interval / tank.time_interval)
+
+    cmap = plt.get_cmap('cividis')
+    norm = plt.Normalize(vmin=tank.sol.t[1], vmax=tank.sol.t[-1])
+
+    fig, ax = plt.subplots()
+
+    eps = 1e-9  
+
+    for i in range(1, n_plots + 1):
+        V_L = float(tank.sol.y[0][i * plot_step])
+
+        # 1) Altura (o "z" de líquido) según geometría del LÍQUIDO
+        if tank.Geo_l == "horizontal":
+            # usa tu misma función geométrica
+            height = root_scalar(
+                tank.calculate_z_height,
+                args=(V_L,),
+                method='brentq',
+                bracket=[1e-9, tank.d_i - 1e-9]).root
+
+        tank.z = height
+
+        zed = tank.z_grid * (tank.l - height) + height
+        # recortar un poco bajo d_i para evitar singularidad geométrica
+        zcap = np.minimum(zed, 0.98 * tank.d_i)
+
+        if tank.Geo_v == "horizontal":
+
+            A_h = np.sqrt(np.maximum(tank.d_i * height - height**2, 0.0))
+            A_z = np.sqrt(np.maximum(tank.d_i * zcap - zcap**2, 0.0))
+            v_profile = tank.v_z * (np.maximum(A_h, eps) / np.maximum(A_z, eps))
+
+
+            #Preparo para graficar
+            #z_to_plot = np.insert(zed, 0, 0.0)
+            #v_to_plot = np.insert(v_profile, 0, v_profile[0])
+
+            #ax.plot(v_to_plot, z_to_plot, color=cmap(norm(tank.sol.t[i * plot_step])))
+            ax.plot(v_profile, zed, color=cmap(norm(tank.sol.t[i * plot_step])))
+
+        ax.text(
+            1.02,
+            ((i - 1 + 0.15) * plot_step) / len(tank.sol.t),
+            f't={tank.sol.t[i * plot_step]:.0f} s',
+            transform=ax.transAxes,
+            verticalalignment='center',
+            bbox=dict(
+                boxstyle='round,pad=0.5',
+                edgecolor='none',
+                facecolor=cmap(norm(tank.sol.t[i * plot_step])),
+                alpha=0.6),)
+
+    ax.grid(True)
+    ax.set_ylabel('Tank Length / m')
+    ax.set_xlabel('Velocity / m/s')
+    ax.set_ylim(0, 0.985 * tank.d_i)
+    ax.xaxis.set_major_formatter(FormatStrFormatter('% 1.1e'))
+    ax.set_title('Velocity profiles at different times')
+    # plt.show()

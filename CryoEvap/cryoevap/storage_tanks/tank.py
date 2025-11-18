@@ -196,9 +196,6 @@ class Tank:
         # Define vapour temperature as de dependent variable
         T = y
 
-        # Print time if self.print_time is True
-        # print("t = %.3f s" % t)
-
         # Grid and properties initialization
         if self.Geo_l == "cylindrical":
             L_dry = self.l*(1-self.LF) # Dry height of the tank
@@ -292,11 +289,15 @@ class Tank:
             dA_dz = -(4*np.sqrt(self.l*z-z**2)+ self.l*self.L/(np.sqrt(self.l*z-z**2))) # variación del área al aumentar la altura
             dV_dz = -2*self.L*np.sqrt(self.l*z-z**2)
             S_wall = self.U_V * (self.T_air - T[1:-1]) * (1-self.eta_w) * (dA_dz/dV_dz) #A_V/V_V
-            v_z = self.v_z * (np.sqrt(np.maximum(self.d_i * self.z - self.z**2, 0.0)) /np.sqrt(np.maximum(self.d_i * z  - z**2, 1e-7))) #REVISAR ECUACION CON PROFESOR
+            v_z = self.v_z * (np.sqrt(np.maximum(self.d_i * self.z - self.z**2, 0.0)) /np.sqrt(np.maximum(self.d_i * z  - z**2, 1e-7))) #REVISAR ECUACION CON PROFESOR no. maximum evits que se vaya a inf. 
             
 
+            A_cs = 2.0 * self.L * np.sqrt(np.maximum(self.l * z - z**2, 1e-12))
+            dAcs_dz = self.L * (self.l - 2.0*z) / np.sqrt(np.maximum(self.l * z - z**2, 1e-12))
+            # Término geométrico
+            geom_term = alpha * (dAcs_dz / A_cs) * dT_dz
             # Update dT
-            dT[1:-1] = alpha*d2T_dz2 - (v_z-v_int) * dT_dz + (alpha/self.cryogen.k_V_avg) * S_wall # REVISAR ECUACIÓN
+            dT[1:-1] = alpha*d2T_dz2 + geom_term - (v_z-v_int) * dT_dz + (alpha/self.cryogen.k_V_avg) * S_wall # REVISAR ECUACIÓN
             
             
             self.dA_dz = dA_dz
@@ -463,6 +464,13 @@ class Tank:
                             'Run tank.evaporate(t) to generate a solution\n'
                             'and thereafter run tank.plot_rhoVavg() again')
         plots.plot_vz(self)
+
+    def plot_vz_h(self):
+        if self.sol is None:
+            raise TypeError('The solution object tank.sol does not exist.\n'
+                            'Run tank.evaporate(t) to generate a solution\n'
+                            'and thereafter run tank.plot_rhoVavg() again')
+        plots.plot_vz_h(self)
 
     def _reconstruct(self):
         '''
