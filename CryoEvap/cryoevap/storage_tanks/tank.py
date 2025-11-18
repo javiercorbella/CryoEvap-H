@@ -261,7 +261,6 @@ class Tank:
         if self.Geo_v == "cylindrical":
             #S_wall for a cylinder
             S_wall = (4*self.U_V*self.d_o/self.d_i**2) * (self.T_air - T[1:-1]) * (1-self.eta_w)
-
             # Update dT
             dT[1:-1] = alpha*d2T_dz2 - (v_z-v_int) * dT_dz + (alpha/self.cryogen.k_V_avg) * S_wall
 
@@ -291,12 +290,12 @@ class Tank:
             S_wall = self.U_V * (self.T_air - T[1:-1]) * (1-self.eta_w) * (dA_dz/dV_dz) #A_V/V_V
             v_z = self.v_z * (np.sqrt(np.maximum(self.d_i * self.z - self.z**2, 0.0)) /np.sqrt(np.maximum(self.d_i * z  - z**2, 1e-7))) #REVISAR ECUACION CON PROFESOR no. maximum evits que se vaya a inf. 
             
-
             A_cs = 2.0 * self.L * np.sqrt(np.maximum(self.l * z - z**2, 1e-12))
             dAcs_dz = self.L * (self.l - 2.0*z) / np.sqrt(np.maximum(self.l * z - z**2, 1e-12))
             # Término geométrico
             geom_term = alpha * (dAcs_dz / A_cs) * dT_dz
             # Update dT
+
             dT[1:-1] = alpha*d2T_dz2 + geom_term - (v_z-v_int) * dT_dz + (alpha/self.cryogen.k_V_avg) * S_wall # REVISAR ECUACIÓN
             
             
