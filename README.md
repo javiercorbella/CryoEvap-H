@@ -10,6 +10,8 @@ El almacenamiento criogénico es una tecnología clave para la transición energ
 
 El modelamiento térmico y de evaporación (BOG, *Boil-Off Gas*) de estanques criogénicos permite cuantificar pérdidas energéticas, estimar tasas de evaporación y diseñar estrategias de operación más seguras y eficientes. Sin embargo, la mayoría de los estudios existentes se enfocan en tanques verticales, por lo que este trabajo busca **extender y adaptar los modelos a geometrías horizontales**, más representativas de estanques de transporte y almacenamiento intermedio.
 
+En el contexto chileno, donde se proyecta una rápida expansión de la cadena de valor del hidrógeno verde —incluyendo producción, transporte, almacenamiento y exportación—, contar con modelos confiables para predecir el comportamiento térmico de estanques criogénicos es fundamental para disminuir pérdidas, mejorar la seguridad operacional y optimizar el diseño de infraestructura. La geografía del país, caracterizada por extensas distancias, zonas climáticas extremas y proyectos situados en puertos o regiones aisladas, hace especialmente relevante el estudio de estanques horizontales, que son la configuración dominante en transporte terrestre. En este sentido, el presente modelo contribuye directamente a la evaluación técnico-económica de proyectos futuros en Chile, permitiendo a empresas, centros de investigación y desarrolladores anticipar el rendimiento real de los sistemas criogénicos y apoyar decisiones de ingeniería con mayor rigurosidad.
+
 ---
 
 ## Estado del arte
@@ -53,8 +55,8 @@ Los parámetros geométricos principales son:
 
 | Parámetro | Valor típico | Unidad |
 |------------|--------------|--------|
-| Diámetro interno | 2.5 | m |
-| Largo | 10 | m |
+| Diámetro interno | 2.3 | m |
+| Largo | 13.7 | m |
 | Volumen total | 56 | m³ |
 | Nivel de llenado inicial | 0.8 | - |
 | Coeficientes globales de transf. de calor | 0.0045 | W/m2 K |
