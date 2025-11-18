@@ -56,12 +56,19 @@ Los parámetros geométricos principales son:
 | Parámetro | Valor típico | Unidad |
 |------------|--------------|--------|
 | Diámetro interno | 2.3 | m |
-| Largo | 13.7 | m |
+| Largo | 13.9 | m |
 | Volumen total | 56 | m³ |
 | Nivel de llenado inicial | 0.8 | - |
 | Coeficientes globales de transf. de calor | 0.0045 | W/m2 K |
 
 Nota: Los coeficientes de transferencia de calor fueron calculados en base a obtener un BOR de 1%, valor estimado por bibliografía. 
+
+Datos obtenidos de:
+
+https://www.airliquidehoupu.com/productinfo/935696.html
+
+https://www.airliquidehoupu.com/productinfo/935703.html
+
 El modelo permite evaluar perfiles de temperatura, tasas de evaporación y flujos de calor en función del tiempo y del nivel de llenado.
 
 ---
